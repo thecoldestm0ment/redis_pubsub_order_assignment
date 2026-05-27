@@ -1,5 +1,6 @@
 const { createRedisClient } = require('../redisClient');
 const { parseOrderEvent } = require('../utils/parseOrderEvent');
+const { todo } = require('../utils/todo');
 
 const CHANNEL = 'orders';
 
@@ -27,14 +28,15 @@ async function main() {
      *
      * 힌트:
      * deliveryQueue.push(...)
+     *
+     * 예시 필드:
+     * - orderId
+     * - productName
+     * - quantity
+     * - status
+     * - receivedAt
      */
-    deliveryQueue.push({
-      orderId: order.orderId,
-      productName: order.productName,
-      quantity: order.quantity,
-      status: 'READY',
-      receivedAt: new Date().toISOString(),
-    });
+    todo(1, 'deliveryQueue에 주문 정보를 추가하시오.');
 
     /**
      * TODO 2.
@@ -43,7 +45,7 @@ async function main() {
      * 출력 예:
      * [배송 서비스] ORD-001 배송 등록 완료
      */
-    console.log(`[배송 서비스] ${order.orderId} 배송 등록 완료`);
+    todo(2, '배송 등록 완료 로그를 출력하시오.');
 
     /**
      * TODO 3.
@@ -52,7 +54,7 @@ async function main() {
      * 출력 예:
      * [배송 서비스] 배송 대기 수: 1
      */
-    console.log(`[배송 서비스] 배송 대기 수: ${deliveryQueue.length}`);
+    todo(3, '현재 배송 대기 수를 출력하시오.');
   });
 }
 

@@ -1,5 +1,6 @@
 const { createRedisClient } = require('../redisClient');
 const { parseOrderEvent } = require('../utils/parseOrderEvent');
+const { todo } = require('../utils/todo');
 
 const CHANNEL = 'orders';
 
@@ -28,9 +29,13 @@ async function main() {
     /**
      * TODO 1.
      * 주문 이벤트에서 상품명과 수량을 꺼내시오.
+     *
+     * 예시:
+     * const productName = order.productName;
+     * const quantity = order.quantity;
      */
-    const productName = order.productName;
-    const quantity = order.quantity;
+    const productName = todo(1, '주문 이벤트에서 productName을 꺼내시오.');
+    const quantity = todo(1, '주문 이벤트에서 quantity를 꺼내시오.');
 
     /**
      * TODO 2.
@@ -39,11 +44,7 @@ async function main() {
      * 주의:
      * stockTable에 없는 상품이면 기본 재고를 100으로 설정한 뒤 차감해도 된다.
      */
-    if (stockTable[productName] === undefined) {
-      stockTable[productName] = 100;
-    }
-
-    stockTable[productName] -= quantity;
+    todo(2, 'stockTable에서 해당 상품의 재고를 차감하시오.');
 
     /**
      * TODO 3.
@@ -53,8 +54,7 @@ async function main() {
      * [재고 서비스] keyboard 재고 2개 차감
      * [재고 서비스] 현재 keyboard 재고: 98
      */
-    console.log(`[재고 서비스] ${productName} 재고 ${quantity}개 차감`);
-    console.log(`[재고 서비스] 현재 ${productName} 재고: ${stockTable[productName]}`);
+    todo(3, '재고 차감 결과를 로그로 출력하시오.');
   });
 }
 

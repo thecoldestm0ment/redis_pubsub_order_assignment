@@ -104,17 +104,31 @@ redis_pubsub_order_assignment/
 ├─ package.json
 ├─ README.md
 ├─ REPORT_TEMPLATE.md
+├─ tools/
+│  └─ check-assignment.js
 └─ src/
    ├─ redisClient.js
    ├─ test-redis.js
    ├─ order-publisher.js
    ├─ utils/
-   │  └─ parseOrderEvent.js
+   │  ├─ parseOrderEvent.js
+   │  └─ todo.js
    └─ subscribers/
       ├─ inventory-subscriber.js
       ├─ delivery-subscriber.js
       └─ notification-subscriber.js
 ```
+
+`src/` 아래 파일은 학생용 skeleton이다.  
+구현 전에는 `npm run pub`, `npm run sub:*` 실행 시 TODO 오류가 나는 것이 정상이다.
+
+기본 유틸 빠른 점검:
+
+```bash
+npm run check:assignment
+```
+
+이 스크립트는 `parseOrderEvent.js`의 기본 검증 로직만 확인한다.
 
 ---
 

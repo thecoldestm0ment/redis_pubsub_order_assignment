@@ -5,12 +5,13 @@
   "main": "src/order-publisher.js",
   "scripts": {
     "test:redis": "node src/test-redis.js",
+    "check:assignment": "node tools/check-assignment.js",
     "pub": "node src/order-publisher.js",
     "sub:inventory": "node src/subscribers/inventory-subscriber.js",
     "sub:delivery": "node src/subscribers/delivery-subscriber.js",
     "sub:notification": "node src/subscribers/notification-subscriber.js"
   },
   "dependencies": {
-    "redis": "^5.0.0"
+    "redis": "5.0.0"
   }
 }

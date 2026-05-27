@@ -1,5 +1,6 @@
 const { createRedisClient } = require('../redisClient');
 const { parseOrderEvent } = require('../utils/parseOrderEvent');
+const { todo } = require('../utils/todo');
 
 const CHANNEL = 'orders';
 
@@ -22,14 +23,13 @@ async function main() {
      * 출력 예:
      * [알림 서비스] ORD-001 주문이 접수되었습니다. 상품: keyboard
      */
-    const notificationMessage =
-      `[알림 서비스] ${order.orderId} 주문이 접수되었습니다. 상품: ${order.productName}`;
+    const notificationMessage = todo(1, '주문번호와 상품명을 사용해 고객 알림 메시지를 만드시오.');
 
     /**
      * TODO 2.
      * 알림 메시지를 출력하시오.
      */
-    console.log(notificationMessage);
+    todo(2, '알림 메시지를 출력하시오.');
   });
 }
 
