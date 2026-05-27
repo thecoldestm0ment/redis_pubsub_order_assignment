@@ -27,6 +27,27 @@ async function createRedisClient(clientName) {
   return client;
 }
 
+async function closeRedisClient(client) {
+  if (!client) {
+    return;
+  }
+
+  if (typeof client.close === 'function') {
+    await client.close();
+    return;
+  }
+
+  if (typeof client.quit === 'function') {
+    await client.quit();
+    return;
+  }
+
+  if (typeof client.destroy === 'function') {
+    client.destroy();
+  }
+}
+
 module.exports = {
+  closeRedisClient,
   createRedisClient,
 };

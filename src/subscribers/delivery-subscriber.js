@@ -1,6 +1,6 @@
-const { createRedisClient } = require('../redisClient');
+const { closeRedisClient, createRedisClient } = require('../redisClient');
 const { parseOrderEvent } = require('../utils/parseOrderEvent');
-const { todo } = require('../utils/todo');
+const { isTodoError, todo } = require('../utils/todo');
 
 const CHANNEL = 'orders';
 
@@ -16,7 +16,7 @@ async function main() {
   console.log('[배송 서비스] orders channel 구독 시작');
   console.log('[배송 서비스] 주문 이벤트를 기다리는 중...');
 
-  await subscriber.subscribe(CHANNEL, (message) => {
+  await subscriber.subscribe(CHANNEL, async (message) => {
     try {
       const order = parseOrderEvent(message);
       if (!order) {
@@ -57,8 +57,14 @@ async function main() {
        */
       todo(3, '현재 배송 대기 수를 출력하시오.');
     } catch (err) {
+      if (isTodoError(err)) {
+        console.error('[배송 서비스] TODO 미완성:', err.message);
+        process.exitCode = 1;
+        await closeRedisClient(subscriber);
+        return;
+      }
+
       console.error('[배송 서비스] 처리 실패:', err.message);
-      process.exit(1);
     }
   });
 }

@@ -30,7 +30,6 @@ async function main() {
       console.log(`[배송 서비스] 배송 대기 수: ${deliveryQueue.length}`);
     } catch (err) {
       console.error('[배송 서비스] 처리 실패:', err.message);
-      process.exit(1);
     }
   });
 }

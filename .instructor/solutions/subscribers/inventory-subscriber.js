@@ -42,7 +42,6 @@ async function main() {
       console.log(`[재고 서비스] 현재 ${productName} 재고: ${stockTable[productName]}`);
     } catch (err) {
       console.error('[재고 서비스] 처리 실패:', err.message);
-      process.exit(1);
     }
   });
 }

@@ -22,7 +22,6 @@ async function main() {
       console.log(notificationMessage);
     } catch (err) {
       console.error('[알림 서비스] 처리 실패:', err.message);
-      process.exit(1);
     }
   });
 }
