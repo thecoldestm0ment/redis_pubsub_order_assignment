@@ -1,0 +1,16 @@
+{
+  "name": "redis-pubsub-order-assignment",
+  "version": "1.0.0",
+  "description": "Redis Pub/Sub order event assignment skeleton",
+  "main": "src/order-publisher.js",
+  "scripts": {
+    "test:redis": "node src/test-redis.js",
+    "pub": "node src/order-publisher.js",
+    "sub:inventory": "node src/subscribers/inventory-subscriber.js",
+    "sub:delivery": "node src/subscribers/delivery-subscriber.js",
+    "sub:notification": "node src/subscribers/notification-subscriber.js"
+  },
+  "dependencies": {
+    "redis": "^5.0.0"
+  }
+}
