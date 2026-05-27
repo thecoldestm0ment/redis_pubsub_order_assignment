@@ -17,44 +17,49 @@ async function main() {
   console.log('[배송 서비스] 주문 이벤트를 기다리는 중...');
 
   await subscriber.subscribe(CHANNEL, (message) => {
-    const order = parseOrderEvent(message);
-    if (!order) {
-      return;
+    try {
+      const order = parseOrderEvent(message);
+      if (!order) {
+        return;
+      }
+
+      /**
+       * TODO 1.
+       * deliveryQueue에 주문 정보를 추가하시오.
+       *
+       * 힌트:
+       * deliveryQueue.push(...)
+       *
+       * 예시 필드:
+       * - orderId
+       * - productName
+       * - quantity
+       * - status
+       * - receivedAt
+       */
+      todo(1, 'deliveryQueue에 주문 정보를 추가하시오.');
+
+      /**
+       * TODO 2.
+       * 배송 등록 완료 로그를 출력하시오.
+       *
+       * 출력 예:
+       * [배송 서비스] ORD-001 배송 등록 완료
+       */
+      todo(2, '배송 등록 완료 로그를 출력하시오.');
+
+      /**
+       * TODO 3.
+       * 현재 배송 대기 수를 출력하시오.
+       *
+       * 출력 예:
+       * [배송 서비스] 배송 대기 수: 1
+       */
+      todo(3, '현재 배송 대기 수를 출력하시오.');
+    } catch (err) {
+      console.error('[배송 서비스] 처리 실패:', err.message);
+      process.exit(1);
     }
-
-    /**
-     * TODO 1.
-     * deliveryQueue에 주문 정보를 추가하시오.
-     *
-     * 힌트:
-     * deliveryQueue.push(...)
-     *
-     * 예시 필드:
-     * - orderId
-     * - productName
-     * - quantity
-     * - status
-     * - receivedAt
-     */
-    todo(1, 'deliveryQueue에 주문 정보를 추가하시오.');
-
-    /**
-     * TODO 2.
-     * 배송 등록 완료 로그를 출력하시오.
-     *
-     * 출력 예:
-     * [배송 서비스] ORD-001 배송 등록 완료
-     */
-    todo(2, '배송 등록 완료 로그를 출력하시오.');
-
-    /**
-     * TODO 3.
-     * 현재 배송 대기 수를 출력하시오.
-     *
-     * 출력 예:
-     * [배송 서비스] 배송 대기 수: 1
-     */
-    todo(3, '현재 배송 대기 수를 출력하시오.');
   });
 }
 

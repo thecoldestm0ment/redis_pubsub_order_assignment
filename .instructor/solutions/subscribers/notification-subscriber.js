@@ -10,15 +10,20 @@ async function main() {
   console.log('[알림 서비스] 주문 이벤트를 기다리는 중...');
 
   await subscriber.subscribe(CHANNEL, (message) => {
-    const order = parseOrderEvent(message);
-    if (!order) {
-      return;
+    try {
+      const order = parseOrderEvent(message);
+      if (!order) {
+        return;
+      }
+
+      const notificationMessage =
+        `[알림 서비스] ${order.orderId} 주문이 접수되었습니다. 상품: ${order.productName}`;
+
+      console.log(notificationMessage);
+    } catch (err) {
+      console.error('[알림 서비스] 처리 실패:', err.message);
+      process.exit(1);
     }
-
-    const notificationMessage =
-      `[알림 서비스] ${order.orderId} 주문이 접수되었습니다. 상품: ${order.productName}`;
-
-    console.log(notificationMessage);
   });
 }
 

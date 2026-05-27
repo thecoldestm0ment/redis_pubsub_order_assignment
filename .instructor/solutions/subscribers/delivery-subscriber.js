@@ -12,21 +12,26 @@ async function main() {
   console.log('[배송 서비스] 주문 이벤트를 기다리는 중...');
 
   await subscriber.subscribe(CHANNEL, (message) => {
-    const order = parseOrderEvent(message);
-    if (!order) {
-      return;
+    try {
+      const order = parseOrderEvent(message);
+      if (!order) {
+        return;
+      }
+
+      deliveryQueue.push({
+        orderId: order.orderId,
+        productName: order.productName,
+        quantity: order.quantity,
+        status: 'READY',
+        receivedAt: new Date().toISOString(),
+      });
+
+      console.log(`[배송 서비스] ${order.orderId} 배송 등록 완료`);
+      console.log(`[배송 서비스] 배송 대기 수: ${deliveryQueue.length}`);
+    } catch (err) {
+      console.error('[배송 서비스] 처리 실패:', err.message);
+      process.exit(1);
     }
-
-    deliveryQueue.push({
-      orderId: order.orderId,
-      productName: order.productName,
-      quantity: order.quantity,
-      status: 'READY',
-      receivedAt: new Date().toISOString(),
-    });
-
-    console.log(`[배송 서비스] ${order.orderId} 배송 등록 완료`);
-    console.log(`[배송 서비스] 배송 대기 수: ${deliveryQueue.length}`);
   });
 }
 

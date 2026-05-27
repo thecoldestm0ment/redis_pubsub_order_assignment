@@ -189,7 +189,7 @@ src/subscribers/inventory-subscriber.js
 
 ```text
 [재고 서비스] keyboard 재고 2개 차감
-[재고 서비스] 현재 재고: 98
+[재고 서비스] 현재 keyboard 재고: 98
 ```
 
 해야 할 일:
@@ -253,7 +253,7 @@ src/subscribers/notification-subscriber.js
 출력 예시:
 
 ```text
-[알림 서비스] ORD-001 주문이 접수되었습니다.
+[알림 서비스] ORD-001 주문이 접수되었습니다. 상품: keyboard
 ```
 
 해야 할 일:

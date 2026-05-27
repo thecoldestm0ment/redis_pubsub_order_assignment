@@ -21,40 +21,46 @@ async function main() {
   console.log('[재고 서비스] 주문 이벤트를 기다리는 중...');
 
   await subscriber.subscribe(CHANNEL, (message) => {
-    const order = parseOrderEvent(message);
-    if (!order) {
-      return;
+    try {
+      const order = parseOrderEvent(message);
+      if (!order) {
+        return;
+      }
+
+      /**
+       * TODO 1.
+       * 주문 이벤트에서 상품명과 수량을 꺼내시오.
+       *
+       * 예시:
+       * const { productName, quantity } = order;
+       */
+      const { productName, quantity } = todo(
+        1,
+        '주문 이벤트에서 productName과 quantity를 꺼내시오.',
+      );
+
+      /**
+       * TODO 2.
+       * stockTable에서 해당 상품의 재고를 quantity만큼 차감하시오.
+       *
+       * 주의:
+       * stockTable에 없는 상품이면 기본 재고를 100으로 설정한 뒤 차감해도 된다.
+       */
+      todo(2, 'stockTable에서 해당 상품의 재고를 차감하시오.');
+
+      /**
+       * TODO 3.
+       * 재고 차감 결과를 로그로 출력하시오.
+       *
+       * 출력 예:
+       * [재고 서비스] keyboard 재고 2개 차감
+       * [재고 서비스] 현재 keyboard 재고: 98
+       */
+      todo(3, '재고 차감 결과를 로그로 출력하시오.');
+    } catch (err) {
+      console.error('[재고 서비스] 처리 실패:', err.message);
+      process.exit(1);
     }
-
-    /**
-     * TODO 1.
-     * 주문 이벤트에서 상품명과 수량을 꺼내시오.
-     *
-     * 예시:
-     * const productName = order.productName;
-     * const quantity = order.quantity;
-     */
-    const productName = todo(1, '주문 이벤트에서 productName을 꺼내시오.');
-    const quantity = todo(1, '주문 이벤트에서 quantity를 꺼내시오.');
-
-    /**
-     * TODO 2.
-     * stockTable에서 해당 상품의 재고를 quantity만큼 차감하시오.
-     *
-     * 주의:
-     * stockTable에 없는 상품이면 기본 재고를 100으로 설정한 뒤 차감해도 된다.
-     */
-    todo(2, 'stockTable에서 해당 상품의 재고를 차감하시오.');
-
-    /**
-     * TODO 3.
-     * 재고 차감 결과를 로그로 출력하시오.
-     *
-     * 출력 예:
-     * [재고 서비스] keyboard 재고 2개 차감
-     * [재고 서비스] 현재 keyboard 재고: 98
-     */
-    todo(3, '재고 차감 결과를 로그로 출력하시오.');
   });
 }
 
