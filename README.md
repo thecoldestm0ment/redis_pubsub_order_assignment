@@ -248,7 +248,7 @@ npm run sub:delivery
 src/subscribers/notification-subscriber.js
 ```
 
-알림 서비스는 주문 이벤트를 받으면 고객에게 주문 접수 알림을 보냈다고 가정한다.
+알림 서비스는 주문 이벤트를 받으면 주문번호와 상품명을 포함한 주문 접수 알림을 보냈다고 가정한다.
 
 출력 예시:
 
